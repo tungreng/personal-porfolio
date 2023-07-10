@@ -1,9 +1,3 @@
-/*SELECT * FROM dbo.fact_transaction_2020 WHERE scenario_id IN ('S2_1', 'S1_118')
-SELECT * FROM dim_scenario
-SELECT * FROM dim_status
-SELECT * FROM dim_platform
-SELECT * FROM dim_payment_channel;*/
-
 -- Overview
 WITH source_table AS (
     SELECT customer_id
@@ -21,8 +15,7 @@ SELECT transaction_type
 FROM source_table
 GROUP BY transaction_type;
 
-
--- 1.1
+-- 1.1 Is there any difference in success rate and volume ratio between scenario IDs?
 WITH scenario_table AS (
     SELECT customer_id
         , transaction_id
@@ -41,7 +34,7 @@ FROM scenario_table
 GROUP BY scenario_id
 ORDER BY scenario_id
 
--- 1.2
+-- 1.2 Is there any difference in success rate and volume ratio between payment platforms? Are there any changes over time (by month/ by week)?
 WITH platform_table AS (
     SELECT customer_id
         , transaction_id
@@ -70,7 +63,7 @@ SELECT *
 FROM platform_month
 ORDER BY payment_platform, [month];
 
--- 1.3
+-- 1.3 Is there any difference in success rate and volume ratio between payment channels? Are there any changes over time (by month/ by week)?
 WITH channel_table AS (
     SELECT customer_id
         , transaction_id
@@ -99,7 +92,7 @@ SELECT *
 FROM channel_month
 ORDER BY payment_method, [month]
 
--- 1.4
+-- 1.4 Which are the main errors of failed transactions? Are there any changes over time (by month)?
 WITH status_table AS (
     SELECT customer_id
         , transaction_id
@@ -124,7 +117,7 @@ SELECT *
 FROM error_month
 ORDER BY status_description, [month];
 
--- 2.1
+-- 2.1 What percentage of the total number of failed transactions were the transactions that occurred before the customer’s first successful Top-up time?
 WITH top_up_table AS (
     SELECT customer_id
         , transaction_id
@@ -153,7 +146,7 @@ SELECT
     FORMAT (COUNT (CASE WHEN failed_trans_time = 1 THEN transaction_id END)*1.0 / COUNT (transaction_id), 'P') AS failed_trans_pct
 FROM failed_trans_table;
 
--- 2.2
+-- 2.2 Percentage of error reasons coming from customers in the total error messages?
 WITH failed_top_up_table AS (
     SELECT customer_id
         , transaction_id
@@ -169,7 +162,7 @@ SELECT COUNT (CASE WHEN status_id NOT IN ('-10', '-11', '-12', '-13', '-14', '-1
     , FORMAT (COUNT (CASE WHEN status_id NOT IN ('-10', '-11', '-12', '-13', '-14', '-15') THEN transaction_id END) *1.0 / COUNT (transaction_id), 'P') AS error_cus_pct
 FROM failed_top_up_table;
 
--- 2.3
+-- 2.3 Does the promotion factor affect the success rate result?
 WITH promo_table AS (
     SELECT customer_id
         , transaction_id
