@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34009.444
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "Incremental_Load + SCD_project", "Incremental_Load + SCD_project\Incremental_Load + SCD_project.dtproj", "{3293D63C-0E1A-421C-AF00-AABDCDA9C6FA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3293D63C-0E1A-421C-AF00-AABDCDA9C6FA}.Development|Default.ActiveCfg = Development
+		{3293D63C-0E1A-421C-AF00-AABDCDA9C6FA}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {555BC71E-0B31-4EB1-9863-23EFAA151C41}
+	EndGlobalSection
+EndGlobal
