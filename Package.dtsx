@@ -1,48 +1,48 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="8/16/2023 11:12:57 PM"
+  DTS:CreationDate="8/16/2023 9:46:41 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="DELL-MTN"
   DTS:CreatorName="DELL-MTN\MANH TUNG"
-  DTS:DTSID="{BA824088-41E8-4D8C-A0C7-44BB43E0F30F}"
+  DTS:DTSID="{C4C013A7-E535-4885-A744-4AD0E40CDAC0}"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="16.0.5228.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="26"
-  DTS:VersionGUID="{9B90C1C6-F674-4179-B8CF-B962261F3585}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{A617BC95-666B-42A2-80DE-41A3F2E45EAE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[DELL-MTN\MY_INSTANCE1]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{F71EA937-937A-48E0-A2CE-9C25F879CF98}"
+      DTS:DTSID="{C468AF4A-1938-4401-8FB0-CB6E4844650F}"
       DTS:ObjectName="DELL-MTN\MY_INSTANCE1">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=DELL-MTN\MY_INSTANCE1;Initial Catalog=DataWarehouse_1;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{F71EA937-937A-48E0-A2CE-9C25F879CF98}DELL-MTN\MY_INSTANCE1;" />
+          DTS:ConnectionString="Data Source=DELL-MTN\MY_INSTANCE1;Initial Catalog=DataWarehouse_1;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package-{C468AF4A-1938-4401-8FB0-CB6E4844650F}DELL-MTN\MY_INSTANCE1;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[DELL-MTN\MY_INSTANCE1.DataWarehouse_1]"
       DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-      DTS:DTSID="{BC0860E6-37DA-492D-988B-336B038384BD}"
+      DTS:DTSID="{7B1173B8-3FE3-47A4-BE55-198AAA624A33}"
       DTS:ObjectName="DELL-MTN\MY_INSTANCE1.DataWarehouse_1">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=DELL-MTN\MY_INSTANCE1;Initial Catalog=DataWarehouse_1;Integrated Security=True;Application Name=SSIS-Package-{BC0860E6-37DA-492D-988B-336B038384BD}DELL-MTN\MY_INSTANCE1.DataWarehouse_1;" />
+          DTS:ConnectionString="Data Source=DELL-MTN\MY_INSTANCE1;Initial Catalog=DataWarehouse_1;Integrated Security=True;Application Name=SSIS-Package-{7B1173B8-3FE3-47A4-BE55-198AAA624A33}DELL-MTN\MY_INSTANCE1.DataWarehouse_1;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{82825F50-4D52-48A8-8743-2C0A94DAB9D1}"
+      DTS:DTSID="{E46787CA-F0ED-470E-BA33-79D134BB670A}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="CDC_State">
@@ -53,20 +53,20 @@
   </DTS:Variables>
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\Get Processing Range"
+      DTS:refId="Package\CDC - End Initial Load"
       DTS:CreationName="Attunity.CdcControlTask"
       DTS:Description="CDC Control Task"
-      DTS:DTSID="{B1138C3F-182D-4308-BAA6-EB29549861B1}"
+      DTS:DTSID="{B00074EC-DDC2-4440-85A3-4F752E5003B7}"
       DTS:ExecutableType="Attunity.CdcControlTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Get Processing Range"
+      DTS:ObjectName="CDC - End Initial Load"
       DTS:TaskContact="Attunity Ltd.; All Rights Reserved; http://www.attunity.com;"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <CDCControlTask
           Connection="DELL-MTN\MY_INSTANCE1.DataWarehouse_1"
-          TaskOperation="GetProcessingRange"
+          TaskOperation="MarkInitialLoadEnd"
           OperationParameter=""
           StateConnection="DELL-MTN\MY_INSTANCE1.DataWarehouse_1"
           StateVariable="User::CDC_State"
@@ -79,13 +79,39 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Incremental Load"
+      DTS:refId="Package\CDC - Setup Initial Load"
+      DTS:CreationName="Attunity.CdcControlTask"
+      DTS:Description="CDC Control Task"
+      DTS:DTSID="{22DF9F9E-69F3-42AF-9D6C-338B188BB84B}"
+      DTS:ExecutableType="Attunity.CdcControlTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CDC - Setup Initial Load"
+      DTS:TaskContact="Attunity Ltd.; All Rights Reserved; http://www.attunity.com;"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <CDCControlTask
+          Connection="DELL-MTN\MY_INSTANCE1.DataWarehouse_1"
+          TaskOperation="MarkInitialLoadStart"
+          OperationParameter=""
+          StateConnection="DELL-MTN\MY_INSTANCE1.DataWarehouse_1"
+          StateVariable="User::CDC_State"
+          AutomaticStatePersistence="True"
+          StateName="CDC_State"
+          StateTable="[dbo].[cdc_states]"
+          CommandTimeout="30"
+          ChangeDetectionRetryInterval="10"
+          ChangeDetectionTimeout="60" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Initial Load"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{7B583677-8560-4287-8189-2762D6CDEA5F}"
+      DTS:DTSID="{C48EF888-129F-4A28-B961-A362C81FB924}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Incremental Load"
+      DTS:ObjectName="Initial Load"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -93,349 +119,149 @@
           version="1">
           <components>
             <component
-              refId="Package\Incremental Load\CDC Source"
-              componentClassID="Microsoft.ManagedComponentHost"
-              contactInfo="Attunity Ltd.; All Rights Reserved; http://www.attunity.com;"
-              description="Reads change data from a SQL Server change table making it available for processing by downstream data-flow components. Only changes within the current processing range determined by the CDC Control task are read"
-              name="CDC Source"
+              refId="Package\Initial Load\Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source"
               usesDispositions="true"
-              version="9">
+              version="7">
               <properties>
                 <property
-                  dataType="System.String"
-                  description="An SSIS string package variable to store the CDC state of the current CDC state."
-                  expressionType="Notify"
-                  name="StateVariable"
-                  typeConverter="Attunity.SqlServer.CDCSrc.PackageVariablesTypeConverter">User::CDC_State</property>
-                <property
                   dataType="System.Int32"
-                  description="Specifies the content of the metadata columns and the rows returned. Modes starting with ‘All’ return all changes and modes starting with ‘Net’ return net changes."
-                  expressionType="Notify"
-                  name="CDCProcessingMode"
-                  typeConverter="Attunity.SqlServer.CDCSrc.CdcProcessingMode">2</property>
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
                 <property
                   dataType="System.String"
-                  description="The name of the CDC capture instance. By default the capture instance name is in the form of &quot;&lt;owner&gt;_&lt;table&gt;&quot;. The actual table that stores the changes is the CDC table named &quot;cdc&quot;.&quot;&lt;capture-instance&gt;_CT&quot;"
-                  expressionType="Notify"
-                  name="CaptureInstance">dbo_DIM_TransactionTypes</property>
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DIM_TransactionTypes]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
                 <property
                   dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time out."
-                  expressionType="Notify"
-                  name="CommandTimeout">30</property>
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
                 <property
                   dataType="System.Boolean"
-                  description="If true, a special output column called ‘__$reprocessing ’ is added. This output column is true for each data row during the initial processing range, or when the previous CDC run&#xA;was stopped without finishing. The default value is false (the __$reprocessing output column is not generated). This special output column allows the SSIS developer to handle consistency errors differently when working on the Initial Processing Range or the previous CDC run was stopped."
-                  expressionType="Notify"
-                  name="ReprocessingIndication">false</property>
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
                 <property
                   dataType="System.String"
-                  name="UserComponentTypeName">Attunity.CdcSourceComponent</property>
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\Incremental Load\CDC Source.Connections[Connection]"
-                  connectionManagerID="Package.ConnectionManagers[DELL-MTN\MY_INSTANCE1.DataWarehouse_1]"
-                  connectionManagerRefId="Package.ConnectionManagers[DELL-MTN\MY_INSTANCE1.DataWarehouse_1]"
-                  name="Connection" />
+                  refId="Package\Initial Load\Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DELL-MTN\MY_INSTANCE1]"
+                  connectionManagerRefId="Package.ConnectionManagers[DELL-MTN\MY_INSTANCE1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
               </connections>
               <outputs>
                 <output
-                  refId="Package\Incremental Load\CDC Source.Outputs[Output]"
-                  name="Output">
+                  refId="Package\Initial Load\Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$start_lsn]"
-                      dataType="bytes"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[__$start_lsn]"
-                      length="10"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$start_lsn]"
-                      name="__$start_lsn"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$operation]"
-                      dataType="i4"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[__$operation]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$operation]"
-                      name="__$operation"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$update_mask]"
-                      dataType="bytes"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[__$update_mask]"
-                      length="128"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$update_mask]"
-                      name="__$update_mask"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Type_ID]"
+                      refId="Package\Initial Load\Source.Outputs[OLE DB Source Output].Columns[Transaction_Type_ID]"
                       dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[Transaction_Type_ID]"
+                      externalMetadataColumnId="Package\Initial Load\Source.Outputs[OLE DB Source Output].ExternalColumns[Transaction_Type_ID]"
                       length="10"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Type_ID]"
+                      lineageId="Package\Initial Load\Source.Outputs[OLE DB Source Output].Columns[Transaction_Type_ID]"
                       name="Transaction_Type_ID"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Type]"
+                      refId="Package\Initial Load\Source.Outputs[OLE DB Source Output].Columns[Transaction_Type]"
                       dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[Transaction_Type]"
+                      externalMetadataColumnId="Package\Initial Load\Source.Outputs[OLE DB Source Output].ExternalColumns[Transaction_Type]"
                       length="50"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Type]"
+                      lineageId="Package\Initial Load\Source.Outputs[OLE DB Source Output].Columns[Transaction_Type]"
                       name="Transaction_Type"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Group]"
+                      refId="Package\Initial Load\Source.Outputs[OLE DB Source Output].Columns[Transaction_Group]"
                       dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[Transaction_Group]"
+                      externalMetadataColumnId="Package\Initial Load\Source.Outputs[OLE DB Source Output].ExternalColumns[Transaction_Group]"
                       length="10"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Group]"
+                      lineageId="Package\Initial Load\Source.Outputs[OLE DB Source Output].Columns[Transaction_Group]"
                       name="Transaction_Group"
                       truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$command_id]"
-                      dataType="i4"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[__$command_id]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$command_id]"
-                      name="__$command_id"
-                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[__$start_lsn]"
-                      dataType="bytes"
-                      length="10"
-                      name="__$start_lsn" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[__$operation]"
-                      dataType="i4"
-                      name="__$operation" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[__$update_mask]"
-                      dataType="bytes"
-                      length="128"
-                      name="__$update_mask" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[Transaction_Type_ID]"
+                      refId="Package\Initial Load\Source.Outputs[OLE DB Source Output].ExternalColumns[Transaction_Type_ID]"
                       dataType="wstr"
                       length="10"
                       name="Transaction_Type_ID" />
                     <externalMetadataColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[Transaction_Type]"
+                      refId="Package\Initial Load\Source.Outputs[OLE DB Source Output].ExternalColumns[Transaction_Type]"
                       dataType="wstr"
                       length="50"
                       name="Transaction_Type" />
                     <externalMetadataColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[Transaction_Group]"
+                      refId="Package\Initial Load\Source.Outputs[OLE DB Source Output].ExternalColumns[Transaction_Group]"
                       dataType="wstr"
                       length="10"
                       name="Transaction_Group" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[Output].ExternalColumns[__$command_id]"
-                      dataType="i4"
-                      name="__$command_id" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput]"
+                  refId="Package\Initial Load\Source.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
-                  name="ErrorOutput">
+                  name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                    <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[__$start_lsn]"
-                      dataType="bytes"
-                      length="10"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[__$start_lsn]"
-                      name="__$start_lsn" />
-                    <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[__$operation]"
-                      dataType="i4"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[__$operation]"
-                      name="__$operation" />
-                    <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[__$update_mask]"
-                      dataType="bytes"
-                      length="128"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[__$update_mask]"
-                      name="__$update_mask" />
-                    <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[Transaction_Type_ID]"
+                      refId="Package\Initial Load\Source.Outputs[OLE DB Source Error Output].Columns[Transaction_Type_ID]"
                       dataType="wstr"
                       length="10"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[Transaction_Type_ID]"
+                      lineageId="Package\Initial Load\Source.Outputs[OLE DB Source Error Output].Columns[Transaction_Type_ID]"
                       name="Transaction_Type_ID" />
                     <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[Transaction_Type]"
+                      refId="Package\Initial Load\Source.Outputs[OLE DB Source Error Output].Columns[Transaction_Type]"
                       dataType="wstr"
                       length="50"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[Transaction_Type]"
+                      lineageId="Package\Initial Load\Source.Outputs[OLE DB Source Error Output].Columns[Transaction_Type]"
                       name="Transaction_Type" />
                     <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[Transaction_Group]"
+                      refId="Package\Initial Load\Source.Outputs[OLE DB Source Error Output].Columns[Transaction_Group]"
                       dataType="wstr"
                       length="10"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[Transaction_Group]"
+                      lineageId="Package\Initial Load\Source.Outputs[OLE DB Source Error Output].Columns[Transaction_Group]"
                       name="Transaction_Group" />
                     <outputColumn
-                      refId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[__$command_id]"
+                      refId="Package\Initial Load\Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[ErrorOutput].Columns[__$command_id]"
-                      name="__$command_id" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Incremental Load\CDC Splitter"
-              componentClassID="Microsoft.ManagedComponentHost"
-              contactInfo="Attunity Ltd.; All Rights Reserved; http://www.attunity.com;"
-              description="Directs a stream of net change records into different outputs based on the type of the change (Insert, Delete and Update). This allows specific handling for different types of change records."
-              name="CDC Splitter"
-              usesDispositions="true"
-              version="9">
-              <properties>
-                <property
-                  dataType="System.String"
-                  name="UserComponentTypeName">Attunity.CdcSplitterComponent</property>
-              </properties>
-              <inputs>
-                <input
-                  refId="Package\Incremental Load\CDC Splitter.Inputs[Input]"
-                  errorOrTruncationOperation="Operation of the changed row is not a valid one"
-                  errorRowDisposition="FailComponent"
-                  name="Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Incremental Load\CDC Splitter.Inputs[Input].Columns[__$start_lsn]"
-                      cachedDataType="bytes"
-                      cachedLength="10"
-                      cachedName="__$start_lsn"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$start_lsn]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\CDC Splitter.Inputs[Input].Columns[__$operation]"
-                      cachedDataType="i4"
-                      cachedName="__$operation"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$operation]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\CDC Splitter.Inputs[Input].Columns[__$update_mask]"
-                      cachedDataType="bytes"
-                      cachedLength="128"
-                      cachedName="__$update_mask"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$update_mask]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\CDC Splitter.Inputs[Input].Columns[Transaction_Type_ID]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="Transaction_Type_ID"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Type_ID]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\CDC Splitter.Inputs[Input].Columns[Transaction_Type]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="Transaction_Type"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Type]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\CDC Splitter.Inputs[Input].Columns[Transaction_Group]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="Transaction_Group"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Group]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\CDC Splitter.Inputs[Input].Columns[__$command_id]"
-                      cachedDataType="i4"
-                      cachedName="__$command_id"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$command_id]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Incremental Load\CDC Splitter.Outputs[InsertOutput]"
-                  exclusionGroup="1"
-                  name="InsertOutput"
-                  synchronousInputId="Package\Incremental Load\CDC Splitter.Inputs[Input]">
-                  <properties>
-                    <property
-                      dataType="System.Int32"
-                      description="Output type - Insert."
-                      name="OutputType"
-                      typeConverter="Attunity.SqlServer.CDCSplit.OutputType">0</property>
-                  </properties>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Incremental Load\CDC Splitter.Outputs[DeleteOutput]"
-                  exclusionGroup="1"
-                  name="DeleteOutput"
-                  synchronousInputId="Package\Incremental Load\CDC Splitter.Inputs[Input]">
-                  <properties>
-                    <property
-                      dataType="System.Int32"
-                      description="Output type - Delete."
-                      name="OutputType"
-                      typeConverter="Attunity.SqlServer.CDCSplit.OutputType">2</property>
-                  </properties>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Incremental Load\CDC Splitter.Outputs[UpdateOutput]"
-                  exclusionGroup="1"
-                  name="UpdateOutput"
-                  synchronousInputId="Package\Incremental Load\CDC Splitter.Inputs[Input]">
-                  <properties>
-                    <property
-                      dataType="System.Int32"
-                      description="Output type - Update."
-                      name="OutputType"
-                      typeConverter="Attunity.SqlServer.CDCSplit.OutputType">1</property>
-                  </properties>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Incremental Load\CDC Splitter.Outputs[ErrorOutput]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="ErrorOutput"
-                  synchronousInputId="Package\Incremental Load\CDC Splitter.Inputs[Input]">
-                  <properties>
-                    <property
-                      dataType="System.Int32"
-                      description="Output type - Error."
-                      name="OutputType"
-                      typeConverter="Attunity.SqlServer.CDCSplit.OutputType">3</property>
-                  </properties>
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Incremental Load\CDC Splitter.Outputs[ErrorOutput].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Incremental Load\CDC Splitter.Outputs[ErrorOutput].Columns[ErrorCode]"
+                      lineageId="Package\Initial Load\Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Incremental Load\CDC Splitter.Outputs[ErrorOutput].Columns[ErrorColumn]"
+                      refId="Package\Initial Load\Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Incremental Load\CDC Splitter.Outputs[ErrorOutput].Columns[ErrorColumn]"
+                      lineageId="Package\Initial Load\Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -444,11 +270,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\Incremental Load\Delete"
+              refId="Package\Initial Load\Target"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="Delete"
+              name="Target"
               usesDispositions="true"
               version="4">
               <properties>
@@ -459,7 +285,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[STAGING_Delete]</property>
+                  name="OpenRowset">[dbo].[DIM_TransactionTypes_Target]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -501,7 +327,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\Incremental Load\Delete.Connections[OleDbConnection]"
+                  refId="Package\Initial Load\Target.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[DELL-MTN\MY_INSTANCE1]"
                   connectionManagerRefId="Package.ConnectionManagers[DELL-MTN\MY_INSTANCE1]"
                   description="The OLE DB runtime connection used to access the database."
@@ -509,482 +335,72 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input]"
+                  refId="Package\Initial Load\Target.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].Columns[__$start_lsn]"
-                      cachedDataType="bytes"
-                      cachedLength="10"
-                      cachedName="__$start_lsn"
-                      externalMetadataColumnId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[__$start_lsn]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$start_lsn]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].Columns[__$operation]"
-                      cachedDataType="i4"
-                      cachedName="__$operation"
-                      externalMetadataColumnId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[__$operation]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$operation]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].Columns[__$update_mask]"
-                      cachedDataType="bytes"
-                      cachedLength="128"
-                      cachedName="__$update_mask"
-                      externalMetadataColumnId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[__$update_mask]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$update_mask]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].Columns[Transaction_Type_ID]"
+                      refId="Package\Initial Load\Target.Inputs[OLE DB Destination Input].Columns[Transaction_Type_ID]"
                       cachedDataType="wstr"
                       cachedLength="10"
                       cachedName="Transaction_Type_ID"
-                      externalMetadataColumnId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type_ID]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Type_ID]" />
+                      externalMetadataColumnId="Package\Initial Load\Target.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type_ID]"
+                      lineageId="Package\Initial Load\Source.Outputs[OLE DB Source Output].Columns[Transaction_Type_ID]" />
                     <inputColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].Columns[Transaction_Type]"
+                      refId="Package\Initial Load\Target.Inputs[OLE DB Destination Input].Columns[Transaction_Type]"
                       cachedDataType="wstr"
                       cachedLength="50"
                       cachedName="Transaction_Type"
-                      externalMetadataColumnId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Type]" />
+                      externalMetadataColumnId="Package\Initial Load\Target.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type]"
+                      lineageId="Package\Initial Load\Source.Outputs[OLE DB Source Output].Columns[Transaction_Type]" />
                     <inputColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].Columns[Transaction_Group]"
+                      refId="Package\Initial Load\Target.Inputs[OLE DB Destination Input].Columns[Transaction_Group]"
                       cachedDataType="wstr"
                       cachedLength="10"
                       cachedName="Transaction_Group"
-                      externalMetadataColumnId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Group]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Group]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].Columns[__$command_id]"
-                      cachedDataType="i4"
-                      cachedName="__$command_id"
-                      externalMetadataColumnId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[__$command_id]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$command_id]" />
+                      externalMetadataColumnId="Package\Initial Load\Target.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Group]"
+                      lineageId="Package\Initial Load\Source.Outputs[OLE DB Source Output].Columns[Transaction_Group]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[__$start_lsn]"
-                      dataType="bytes"
-                      length="10"
-                      name="__$start_lsn" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[__$operation]"
-                      dataType="i4"
-                      name="__$operation" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[__$update_mask]"
-                      dataType="bytes"
-                      length="128"
-                      name="__$update_mask" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type_ID]"
+                      refId="Package\Initial Load\Target.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type_ID]"
                       dataType="wstr"
                       length="10"
                       name="Transaction_Type_ID" />
                     <externalMetadataColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type]"
+                      refId="Package\Initial Load\Target.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type]"
                       dataType="wstr"
                       length="50"
                       name="Transaction_Type" />
                     <externalMetadataColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Group]"
+                      refId="Package\Initial Load\Target.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Group]"
                       dataType="wstr"
                       length="10"
                       name="Transaction_Group" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input].ExternalColumns[__$command_id]"
-                      dataType="i4"
-                      name="__$command_id" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Incremental Load\Delete.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Initial Load\Target.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\Initial Load\Target.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Incremental Load\Delete.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Initial Load\Target.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Incremental Load\Delete.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Initial Load\Target.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Incremental Load\Delete.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Initial Load\Target.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Incremental Load\Delete.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Incremental Load\Insert"
-              componentClassID="Microsoft.OLEDBDestination"
-              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-              description="OLE DB Destination"
-              name="Insert"
-              usesDispositions="true"
-              version="4">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[STAGING_Insert]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">3</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
-                  name="FastLoadMaxInsertCommitSize">2147483647</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Incremental Load\Insert.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DELL-MTN\MY_INSTANCE1]"
-                  connectionManagerRefId="Package.ConnectionManagers[DELL-MTN\MY_INSTANCE1]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input]"
-                  errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Destination Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].Columns[__$start_lsn]"
-                      cachedDataType="bytes"
-                      cachedLength="10"
-                      cachedName="__$start_lsn"
-                      externalMetadataColumnId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[__$start_lsn]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$start_lsn]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].Columns[__$operation]"
-                      cachedDataType="i4"
-                      cachedName="__$operation"
-                      externalMetadataColumnId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[__$operation]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$operation]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].Columns[__$update_mask]"
-                      cachedDataType="bytes"
-                      cachedLength="128"
-                      cachedName="__$update_mask"
-                      externalMetadataColumnId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[__$update_mask]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$update_mask]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].Columns[Transaction_Type_ID]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="Transaction_Type_ID"
-                      externalMetadataColumnId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type_ID]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Type_ID]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].Columns[Transaction_Type]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="Transaction_Type"
-                      externalMetadataColumnId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Type]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].Columns[Transaction_Group]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="Transaction_Group"
-                      externalMetadataColumnId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Group]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Group]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].Columns[__$command_id]"
-                      cachedDataType="i4"
-                      cachedName="__$command_id"
-                      externalMetadataColumnId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[__$command_id]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$command_id]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[__$start_lsn]"
-                      dataType="bytes"
-                      length="10"
-                      name="__$start_lsn" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[__$operation]"
-                      dataType="i4"
-                      name="__$operation" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[__$update_mask]"
-                      dataType="bytes"
-                      length="128"
-                      name="__$update_mask" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type_ID]"
-                      dataType="wstr"
-                      length="10"
-                      name="Transaction_Type_ID" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type]"
-                      dataType="wstr"
-                      length="50"
-                      name="Transaction_Type" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Group]"
-                      dataType="wstr"
-                      length="10"
-                      name="Transaction_Group" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input].ExternalColumns[__$command_id]"
-                      dataType="i4"
-                      name="__$command_id" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Incremental Load\Insert.Outputs[OLE DB Destination Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Incremental Load\Insert.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Incremental Load\Insert.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Incremental Load\Insert.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Incremental Load\Insert.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Incremental Load\Update"
-              componentClassID="Microsoft.OLEDBDestination"
-              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-              description="OLE DB Destination"
-              name="Update"
-              usesDispositions="true"
-              version="4">
-              <properties>
-                <property
-                  dataType="System.Int32"
-                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
-                  name="CommandTimeout">0</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[STAGING_Update]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
-                  description="The SQL command to be executed."
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">3</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
-                  name="FastLoadMaxInsertCommitSize">2147483647</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Incremental Load\Update.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[DELL-MTN\MY_INSTANCE1]"
-                  connectionManagerRefId="Package.ConnectionManagers[DELL-MTN\MY_INSTANCE1]"
-                  description="The OLE DB runtime connection used to access the database."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input]"
-                  errorOrTruncationOperation="Insert"
-                  errorRowDisposition="FailComponent"
-                  hasSideEffects="true"
-                  name="OLE DB Destination Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].Columns[__$start_lsn]"
-                      cachedDataType="bytes"
-                      cachedLength="10"
-                      cachedName="__$start_lsn"
-                      externalMetadataColumnId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[__$start_lsn]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$start_lsn]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].Columns[__$operation]"
-                      cachedDataType="i4"
-                      cachedName="__$operation"
-                      externalMetadataColumnId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[__$operation]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$operation]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].Columns[__$update_mask]"
-                      cachedDataType="bytes"
-                      cachedLength="128"
-                      cachedName="__$update_mask"
-                      externalMetadataColumnId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[__$update_mask]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$update_mask]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].Columns[Transaction_Type_ID]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="Transaction_Type_ID"
-                      externalMetadataColumnId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type_ID]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Type_ID]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].Columns[Transaction_Type]"
-                      cachedDataType="wstr"
-                      cachedLength="50"
-                      cachedName="Transaction_Type"
-                      externalMetadataColumnId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Type]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].Columns[Transaction_Group]"
-                      cachedDataType="wstr"
-                      cachedLength="10"
-                      cachedName="Transaction_Group"
-                      externalMetadataColumnId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Group]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[Transaction_Group]" />
-                    <inputColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].Columns[__$command_id]"
-                      cachedDataType="i4"
-                      cachedName="__$command_id"
-                      externalMetadataColumnId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[__$command_id]"
-                      lineageId="Package\Incremental Load\CDC Source.Outputs[Output].Columns[__$command_id]" />
-                  </inputColumns>
-                  <externalMetadataColumns
-                    isUsed="True">
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[__$start_lsn]"
-                      dataType="bytes"
-                      length="10"
-                      name="__$start_lsn" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[__$operation]"
-                      dataType="i4"
-                      name="__$operation" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[__$update_mask]"
-                      dataType="bytes"
-                      length="128"
-                      name="__$update_mask" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type_ID]"
-                      dataType="wstr"
-                      length="10"
-                      name="Transaction_Type_ID" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Type]"
-                      dataType="wstr"
-                      length="50"
-                      name="Transaction_Type" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[Transaction_Group]"
-                      dataType="wstr"
-                      length="10"
-                      name="Transaction_Group" />
-                    <externalMetadataColumn
-                      refId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input].ExternalColumns[__$command_id]"
-                      dataType="i4"
-                      name="__$command_id" />
-                  </externalMetadataColumns>
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Incremental Load\Update.Outputs[OLE DB Destination Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Incremental Load\Update.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Incremental Load\Update.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Incremental Load\Update.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Incremental Load\Update.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Initial Load\Target.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -995,107 +411,12 @@
           </components>
           <paths>
             <path
-              refId="Package\Incremental Load.Paths[DeleteOutput]"
-              endId="Package\Incremental Load\Delete.Inputs[OLE DB Destination Input]"
-              name="DeleteOutput"
-              startId="Package\Incremental Load\CDC Splitter.Outputs[DeleteOutput]" />
-            <path
-              refId="Package\Incremental Load.Paths[InsertOutput]"
-              endId="Package\Incremental Load\Insert.Inputs[OLE DB Destination Input]"
-              name="InsertOutput"
-              startId="Package\Incremental Load\CDC Splitter.Outputs[InsertOutput]" />
-            <path
-              refId="Package\Incremental Load.Paths[Output]"
-              endId="Package\Incremental Load\CDC Splitter.Inputs[Input]"
-              name="Output"
-              startId="Package\Incremental Load\CDC Source.Outputs[Output]" />
-            <path
-              refId="Package\Incremental Load.Paths[UpdateOutput]"
-              endId="Package\Incremental Load\Update.Inputs[OLE DB Destination Input]"
-              name="UpdateOutput"
-              startId="Package\Incremental Load\CDC Splitter.Outputs[UpdateOutput]" />
+              refId="Package\Initial Load.Paths[OLE DB Source Output]"
+              endId="Package\Initial Load\Target.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Initial Load\Source.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Marked Processed Range"
-      DTS:CreationName="Attunity.CdcControlTask"
-      DTS:Description="CDC Control Task"
-      DTS:DTSID="{0A90D990-2E8A-4A9E-B9E0-20FB794B0B8D}"
-      DTS:ExecutableType="Attunity.CdcControlTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Marked Processed Range"
-      DTS:TaskContact="Attunity Ltd.; All Rights Reserved; http://www.attunity.com;"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <CDCControlTask
-          Connection="DELL-MTN\MY_INSTANCE1.DataWarehouse_1"
-          TaskOperation="MarkProcessedRange"
-          OperationParameter=""
-          StateConnection="DELL-MTN\MY_INSTANCE1.DataWarehouse_1"
-          StateVariable="User::CDC_State"
-          AutomaticStatePersistence="True"
-          StateName="CDC_State"
-          StateTable="[dbo].[cdc_states]"
-          CommandTimeout="30"
-          ChangeDetectionRetryInterval="10"
-          ChangeDetectionTimeout="60" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\SCD Type 2"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{98032D88-943D-42D5-BA2F-6362C7031298}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="SCD Type 2"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{F71EA937-937A-48E0-A2CE-9C25F879CF98}"
-          SQLTask:BypassPrepare="False"
-          SQLTask:SqlStatementSource="DROP TABLE IF EXISTS [TMP_DIM_TransactionTypes_Target_SCD];&#xA;SELECT * INTO [TMP_DIM_TransactionTypes_Target_SCD] FROM [DataWarehouse_1].[dbo].[DIM_TransactionTypes_Target_SCD];&#xA;&#xA;DROP TABLE IF EXISTS [DataWarehouse_1].[dbo].[DIM_TransactionTypes_Target_SCD];&#xA;&#xA;WITH N AS&#xA;(&#xA;SELECT S.[Transaction_Type_ID],S.[Transaction_Type],S.[Transaction_Group],IIF(UP.[Transaction_Type_ID] IS NOT NULL, 0, 1) AS IS_CURRENT &#xA;FROM [DataWarehouse_1].[dbo].[DIM_TransactionTypes_Target] S&#xA;LEFT JOIN [DataWarehouse_1].[dbo].[STAGING_Update] UP &#xA;ON S.[Transaction_Type_ID] = UP.[Transaction_Type_ID]&#xA;LEFT JOIN [DataWarehouse_1].[dbo].[STAGING_Delete] DEL&#xA;ON S.[Transaction_Type_ID] = DEL.[Transaction_Type_ID]&#xA;WHERE DEL.[Transaction_Type_ID] IS NULL&#xA;&#xA;UNION ALL&#xA;&#xA;SELECT [Transaction_Type_ID],[Transaction_Type],[Transaction_Group], 1 IS_CURRENT&#xA;FROM [DataWarehouse_1].[dbo].[STAGING_Update]&#xA;&#xA;UNION ALL&#xA;&#xA;SELECT [Transaction_Type_ID],[Transaction_Type],[Transaction_Group], 1 IS_CURRENT&#xA;FROM [DataWarehouse_1].[dbo].[STAGING_Insert]&#xA;&#xA;UNION ALL&#xA;&#xA;SELECT [Transaction_Type_ID],[Transaction_Type],[Transaction_Group], 0 IS_CURRENT&#xA;FROM [DataWarehouse_1].[dbo].[STAGING_Delete]&#xA;&#xA;UNION ALL&#xA;&#xA;SELECT [Transaction_Type_ID],[Transaction_Type],[Transaction_Group], 0 IS_CURRENT&#xA;FROM [DataWarehouse_1].[dbo].[TMP_DIM_TransactionTypes_Target_SCD]&#xA;WHERE [IS_CURRENT] = 0&#xA;&#xA;)&#xA;&#xA;SELECT * INTO [DataWarehouse_1].[dbo].[DIM_TransactionTypes_Target_SCD] FROM N" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Truncate Staging Tables"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{4A4F6699-36B0-4562-8B35-BCCCDE3993EA}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Truncate Staging Tables"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{F71EA937-937A-48E0-A2CE-9C25F879CF98}"
-          SQLTask:BypassPrepare="False"
-          SQLTask:SqlStatementSource="TRUNCATE TABLE [DataWarehouse_1].[dbo].[STAGING_Insert];&#xA;TRUNCATE TABLE [DataWarehouse_1].[dbo].[STAGING_Update];&#xA;TRUNCATE TABLE [DataWarehouse_1].[dbo].[STAGING_Delete]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Update SnapShot Target"
-      DTS:CreationName="Microsoft.ExecuteSQLTask"
-      DTS:Description="Execute SQL Task"
-      DTS:DTSID="{C0C8D199-8269-4A6F-9082-1784F5B74C37}"
-      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Update SnapShot Target"
-      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <SQLTask:SqlTaskData
-          SQLTask:Connection="{F71EA937-937A-48E0-A2CE-9C25F879CF98}"
-          SQLTask:BypassPrepare="False"
-          SQLTask:SqlStatementSource="DELETE FROM [DataWarehouse_1].[dbo].[DIM_TransactionTypes_Target];&#xA;&#xA;INSERT INTO [DataWarehouse_1].[dbo].[DIM_TransactionTypes_Target]&#xA;SELECT [Transaction_Type_ID]&#xA;      ,[Transaction_Type]&#xA;      ,[Transaction_Group]&#xA;FROM [DataWarehouse_1].[dbo].[DIM_TransactionTypes_Target_SCD]&#xA;WHERE [IS_CURRENT] = 1" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -1103,43 +424,19 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{B47C44EB-44E2-4B53-8945-33819CA30526}"
-      DTS:From="Package\Truncate Staging Tables"
+      DTS:DTSID="{A051884B-B979-441A-96DD-D5107C4C3B0A}"
+      DTS:From="Package\CDC - Setup Initial Load"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
-      DTS:To="Package\Get Processing Range" />
+      DTS:To="Package\Initial Load" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
       DTS:CreationName=""
-      DTS:DTSID="{95E3057F-7C0F-4C04-B4EB-6F6842CF3948}"
-      DTS:From="Package\Get Processing Range"
+      DTS:DTSID="{0F5F03EF-1F44-4B17-AB07-2F99E3F5019A}"
+      DTS:From="Package\Initial Load"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 1"
-      DTS:To="Package\Incremental Load" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
-      DTS:CreationName=""
-      DTS:DTSID="{671E90BE-9839-4BB5-BBC1-2BB6E24273DC}"
-      DTS:From="Package\Incremental Load"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 2"
-      DTS:To="Package\SCD Type 2" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
-      DTS:CreationName=""
-      DTS:DTSID="{F80BB143-D48E-4DA9-B5BC-273851DFE74B}"
-      DTS:From="Package\SCD Type 2"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 3"
-      DTS:To="Package\Marked Processed Range" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
-      DTS:CreationName=""
-      DTS:DTSID="{1A96B52D-1210-4E6C-80FA-044161E80E11}"
-      DTS:From="Package\Marked Processed Range"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 4"
-      DTS:To="Package\Update SnapShot Target" />
+      DTS:To="Package\CDC - End Initial Load" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -1152,45 +449,33 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="180.8,41.6"
-          Id="Package\Get Processing Range"
-          TopLeft="306.269841921809,21.4117646871141" />
+          Size="182.4,41.6"
+          Id="Package\CDC - End Initial Load"
+          TopLeft="209.285714731228,237.05882332162" />
         <NodeLayout
-          Size="160.8,41.6"
-          Id="Package\Incremental Load"
-          TopLeft="575.396826621694,21.2418300467402" />
+          Size="192,41.6"
+          Id="Package\CDC - Setup Initial Load"
+          TopLeft="204.285714720585,53.5294117177853" />
         <NodeLayout
-          Size="196,41.6"
-          Id="Package\Marked Processed Range"
-          TopLeft="377.142857945695,214.117646871141" />
-        <NodeLayout
-          Size="133.6,41.6"
-          Id="Package\SCD Type 2"
-          TopLeft="404.285715146333,116.235294015762" />
-        <NodeLayout
-          Size="192.8,41.6"
-          Id="Package\Truncate Staging Tables"
-          TopLeft="34.2857143586996,19.8823529237488" />
-        <NodeLayout
-          Size="194.4,41.6"
-          Id="Package\Update SnapShot Target"
-          TopLeft="381.428572240533,303.588235028011" />
+          Size="130.4,41.6"
+          Id="Package\Initial Load"
+          TopLeft="227.857143342191,143.764705756338" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="227.0857143587,41.4470588054315">
+          TopLeft="296.671429031388,95.1294117177853">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="79.1841275631099,0"
+              EndConnector="0,48.6352940385523"
               Start="0,0"
-              End="71.6841275631099,0">
+              End="0,41.1352940385523">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="71.6841275631099,0" />
+                    End="0,41.1352940385523" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1201,96 +486,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="487.069841921809,42.1267973669271">
+          TopLeft="296.77142903671,185.364705756338">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="88.3269846998848,0"
+              EndConnector="0,51.6941175652829"
               Start="0,0"
-              End="80.8269846998848,0">
+              End="0,44.1941175652829">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="80.8269846998848,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="655.796826621694,62.8418300467402">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-184.711111475361,53.3934639690221"
-              Start="0,0"
-              End="-184.711111475361,45.8934639690221">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,22.6967319845111" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,22.6967319845111"
-                    Point2="0,26.6967319845111"
-                    Point3="-4,26.6967319845111" />
-                  <mssgle:LineSegment
-                    End="-180.711111475361,26.6967319845111" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-180.711111475361,26.6967319845111"
-                    Point2="-184.711111475361,26.6967319845111"
-                    Point3="-184.711111475361,30.6967319845111" />
-                  <mssgle:LineSegment
-                    End="-184.711111475361,45.8934639690221" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="473.114286546014,157.835294015762">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,56.2823528553789"
-              Start="0,0"
-              End="0,48.7823528553789">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,48.7823528553789" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="476.885715093114,255.717646871141">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,47.8705881568696"
-              Start="0,0"
-              End="0,40.3705881568696">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,40.3705881568696" />
+                    End="0,44.1941175652829" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1303,80 +510,32 @@
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Incremental Load">
+    design-time-name="Package\Initial Load">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="106.4,41.6"
-          Id="Package\Incremental Load\Insert"
-          TopLeft="107.857143086742,211.823529226094" />
-        <NodeLayout
-          Size="112,41.6"
-          Id="Package\Incremental Load\Update"
-          TopLeft="260.000000553471,215.647058634507" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="108.8,41.6"
-          Id="Package\Incremental Load\Delete"
-          TopLeft="414.285715167619,216.411764516189" />
+          Id="Package\Initial Load\Target"
+          TopLeft="149.285714603504,161.352941035038" />
         <NodeLayout
-          Size="133.6,41.6"
-          Id="Package\Incremental Load\CDC Source"
-          TopLeft="249.285714816378,20.6470588054315" />
-        <NodeLayout
-          Size="135.2,41.6"
-          Id="Package\Incremental Load\CDC Splitter"
-          TopLeft="242.857143374122,107.411764618744" />
+          Size="110.4,41.6"
+          Id="Package\Initial Load\Source"
+          TopLeft="148.571428887698,55.8235293628332" />
         <EdgeLayout
-          Id="Package\Incremental Load.Paths[UpdateOutput]"
-          TopLeft="331.657143374122,149.011764618744">
+          Id="Package\Initial Load.Paths[OLE DB Source Output]"
+          TopLeft="203.728571745601,97.4235293628332">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-15.657142820651,66.6352940157625"
+              EndConnector="0,63.9294116722053"
               Start="0,0"
-              End="-15.657142820651,59.1352940157625">
+              End="0,56.4294116722053">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.1217337046612" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,23.1217337046612"
-                    Point2="0,27.1217337046612"
-                    Point3="-4,27.1217337046612" />
-                  <mssgle:LineSegment
-                    End="-11.657142820651,27.1217337046612" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-11.657142820651,27.1217337046612"
-                    Point2="-15.657142820651,27.1217337046612"
-                    Point3="-15.657142820651,31.1217337046612" />
-                  <mssgle:LineSegment
-                    End="-15.657142820651,59.1352940157625" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-39.4589034415755,32.1217337046612,63.2606640625,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Incremental Load.Paths[Output]"
-          TopLeft="313.27142909525,62.2470588054315">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,45.1647058133127"
-              Start="0,0"
-              End="0,37.6647058133127">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,37.6647058133127" />
+                    End="0,56.4294116722053" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1385,83 +544,11 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Incremental Load.Paths[InsertOutput]"
-          TopLeft="310.457143374122,149.011764618744">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-149.40000028738,62.8117646073495"
-              Start="0,0"
-              End="-149.40000028738,55.3117646073495">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,27.4058823036747" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,27.4058823036747"
-                    Point2="0,31.4058823036747"
-                    Point3="-4,31.4058823036747" />
-                  <mssgle:LineSegment
-                    End="-145.40000028738,31.4058823036747" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-145.40000028738,31.4058823036747"
-                    Point2="-149.40000028738,31.4058823036747"
-                    Point3="-149.40000028738,35.4058823036747" />
-                  <mssgle:LineSegment
-                    End="-149.40000028738,55.3117646073495" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-103.67798842494,36.4058823036747,57.9559765625,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Incremental Load.Paths[DeleteOutput]"
-          TopLeft="342.257143374122,149.011764618744">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="126.428571793497,67.3999998974445"
-              Start="0,0"
-              End="126.428571793497,59.8999998974445">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,19.335783330063" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,19.335783330063"
-                    Point2="0,23.335783330063"
-                    Point3="4,23.335783330063" />
-                  <mssgle:LineSegment
-                    End="122.428571793497,23.335783330063" />
-                  <mssgle:CubicBezierSegment
-                    Point1="122.428571793497,23.335783330063"
-                    Point2="126.428571793497,23.335783330063"
-                    Point3="126.428571793497,27.335783330063" />
-                  <mssgle:LineSegment
-                    End="126.428571793497,59.8999998974445" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="33.2678991779985,28.335783330063,59.8927734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Incremental Load\Delete">
+    design-time-name="Package\Initial Load\Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1474,7 +561,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Incremental Load\Insert">
+    design-time-name="Package\Initial Load\Target">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1483,27 +570,6 @@
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Incremental Load\Update">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Incremental Load\CDC Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
